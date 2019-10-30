@@ -8,7 +8,7 @@ Globals:
     Timeout: 20
 
 Resources:
-  HelloWorldFunction:
+  AppFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: ./target/api-aws-lambda-1.0.jar
@@ -29,12 +29,12 @@ Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  HelloWorldApi:
-    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+  AppApi:
+    Description: "API Gateway endpoint URL for Prod stage for App function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
-  HelloWorldFunction:
+  AppFunction:
     Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt HelloWorldFunction.Arn
-  HelloWorldFunctionIamRole:
+    Value: !GetAtt AppFunction.Arn
+  AppFunctionIamRole:
     Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt HelloWorldFunctionRole.Arn
+    Value: !GetAtt AppFunctionRole.Arn
