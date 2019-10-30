@@ -1,15 +1,16 @@
 package br.com.aws.handle;
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.xray.AWSXRay;
+import com.amazonaws.xray.entities.Subsegment;
 import br.com.aws.GatewayResponse;
 
 /**
@@ -24,6 +25,8 @@ public class AppHandler implements RequestHandler<Object, Object> {
         headers.put("Content-Type", "application/json");
        
         headers.put("X-Custom-Header", "application/json");
+        
+        Subsegment subsegment = AWSXRay.beginSubsegment("AppHandler::handleRequest");
         
         try {
             
@@ -71,8 +74,11 @@ public class AppHandler implements RequestHandler<Object, Object> {
             
             return new GatewayResponse(builder.toString(), headers, 200);
                         
-        } catch (IOException e) {
+        } catch (Exception e) {
+            subsegment.addException(e);
             return new GatewayResponse("{}", headers, 500);
+        } finally {
+            AWSXRay.endSubsegment();
         }
     }
 
@@ -82,4 +88,5 @@ public class AppHandler implements RequestHandler<Object, Object> {
             return br.lines().collect(Collectors.joining(System.lineSeparator()));
         }
     }
+
 }
