@@ -18,13 +18,59 @@ import br.com.aws.GatewayResponse;
 public class AppHandler implements RequestHandler<Object, Object> {
 
     public Object handleRequest(final Object input, final Context context) {
+        
         Map<String, String> headers = new HashMap<>();
+
         headers.put("Content-Type", "application/json");
+       
         headers.put("X-Custom-Header", "application/json");
+        
         try {
+            
             final String pageContents = this.getPageContents("https://checkip.amazonaws.com");
-            String output = String.format("{ \"message\": \"hello world\", \"location\": \"%s\" }", pageContents);
-            return new GatewayResponse(output, headers, 200);
+
+            StringBuilder builder = new StringBuilder();
+            
+            builder.append("{ ");
+            
+            builder.append("\"name\"");
+            builder.append(" : ");
+            builder.append("\"Anderson\"");
+            
+            builder.append(",");
+            
+            builder.append("\"nickname\"");
+            builder.append(" : ");
+            builder.append("\"anderltda\"");
+            
+            builder.append(",");
+            
+            builder.append("\"lastname\"");
+            builder.append(" : ");
+            builder.append("\"Nascimento\"");
+            
+            builder.append(",");
+            
+            builder.append("\"age\"");
+            builder.append(" : ");
+            builder.append("\"35\"");
+            
+            builder.append(",");
+            
+            builder.append("\"city\"");
+            builder.append(" : ");
+            builder.append("\"SP\"");
+            
+            builder.append(",");
+            
+            builder.append("\"location\"");
+            builder.append(" : ");
+            builder.append("\"" + pageContents + "\"");
+            
+            builder.append(" }");
+            
+            return new GatewayResponse(builder.toString(), headers, 200);
+                        
         } catch (IOException e) {
             return new GatewayResponse("{}", headers, 500);
         }
