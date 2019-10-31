@@ -9,7 +9,7 @@ Globals:
 
 Resources:
   AppFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Type: AWS::Lambda::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: ./target/api-aws-lambda-1.0.jar
       Description: Cloud formation created lambda for demo-xray-lambda
