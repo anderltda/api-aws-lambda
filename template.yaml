@@ -28,9 +28,9 @@ Resources:
             Path: /init
             Method: get
       DependsOn:
-        - roleLambdaExecutionPolicy
+        - api-aws-lambda-stack-AppFunctionRole-CSNFW81HJVBP
  
-  roleLambdaExecutionPolicy:
+  api-aws-lambda-stack-AppFunctionRole-CSNFW81HJVBP:
     Type: "AWS::IAM::Role"
     Properties:
       AssumeRolePolicyDocument:
