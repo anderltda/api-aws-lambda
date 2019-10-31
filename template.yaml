@@ -16,8 +16,16 @@ Resources:
       Handler: br.com.aws.handle.AppHandler::handleRequest
       Runtime: java8
       MemorySize: 512
-      TracingConfig: 
-        Mode: Active
+      Tracing: Active
+      Policies:
+       - AWSLambdaExecute # Managed Policy
+       - Version: '2012-10-17' # Policy Document
+         Statement:
+           - Effect: Allow
+             Action:
+               - xray:PutTraceSegments
+               - xray:PutTelemetryRecords
+             Resource: '*'      
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           STAGE: prod
@@ -27,30 +35,7 @@ Resources:
           Properties:
             Path: /init
             Method: get
-      DependsOn:
-        - roleLambdaExecutionPolicy
- 
-  roleLambdaExecutionPolicy:
-    Type: "AWS::IAM::Role"
-    Properties:
-      AssumeRolePolicyDocument:
-      Version: "2012-10-17"
-      Statement:
-        - Action: "sts:AssumeRole"
-      Principal:
-        Service: lambda.amazonaws.com
-      Effect: Allow
-      Policies:
-        PolicyName: demo-xray-lambda-policy
-        PolicyDocument:
-          Version: "2012-10-17"
-          Statement:
-          - Action:
-            - "xray:PutTraceSegments"
-            - "xray:PutTelemetryRecords"
-            Effect: Allow
-            Resource: "*"       
-        
+
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
