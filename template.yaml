@@ -9,7 +9,7 @@ Globals:
 
 Resources:
   AppFunction:
-    Type: AWS::Lambda::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: ./target/api-aws-lambda-1.0.jar
       Description: Cloud formation created lambda for demo-xray-lambda
@@ -25,12 +25,12 @@ Resources:
         HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /start
+            Path: /init
             Method: get
       DependsOn:
-        - api-aws-lambda-stack-AppFunctionRole-CSNFW81HJVBP
+        - roleLambdaExecutionPolicy
  
-  api-aws-lambda-stack-AppFunctionRole-CSNFW81HJVBP:
+  roleLambdaExecutionPolicy:
     Type: "AWS::IAM::Role"
     Properties:
       AssumeRolePolicyDocument:
