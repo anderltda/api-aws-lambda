@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: 'Create code build'
+Resources:
+  CodeBuildProject:
+    Type: "AWS::CodeBuild::Project"
+    Properties:
+      Artifacts:
+        Type: S3
+        Packaging: NONE
+      BadgeEnabled: true
+      Description: 'CodeBuild Project for teste'
+      Environment:
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: 'aws/codebuild/amazonlinux2-x86_64-standard:1.0'
+        Type: LINUX_CONTAINER
+      Name: StackNameTeste
+      ServiceRole: 'arn:aws:iam::304408165732:role/ROLE-CODE-BUILD'
+      Source:
+        Auth:
+          Type: OAUTH
+        GitCloneDepth: 1
+        GitSubmodulesConfig:
+          FetchSubmodules: true
+        Location: 'https://github.com/anderltda/api-aws-lambda'
+        ReportBuildStatus: true
+        Type: GITHUB
