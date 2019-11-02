@@ -28,8 +28,8 @@ Resources:
             Owner: anderltda
             Repo: api-aws-lambda
             Branch: master
-            PollForSourceChanges: false
-            OAuthToken: 02ed5249171d226951666ebbde06442cd480b43f
+            PollForSourceChanges: true
+            OAuthToken: 7dcad2eaa8a8ccadf5a61babca834f1348d8f74f
           RunOrder: 1
       - Name: Build
         Actions:
