@@ -66,9 +66,9 @@ public class AppHandler implements RequestHandler<Object, Object> {
             
             builder.append(",");
             
-            builder.append("\"city\"");
+            builder.append("\"working\"");
             builder.append(" : ");
-            builder.append("\"SP\"");
+            builder.append("\"VELOE\"");
             
             builder.append(",");
             
