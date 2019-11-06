@@ -30,55 +30,7 @@ public class AppHandler implements RequestHandler<Object, Object> {
         
         try {
             
-            final String pageContents = this.getPageContents("https://checkip.amazonaws.com");
-
-            StringBuilder builder = new StringBuilder();
-            
-            builder.append("{ ");
-            
-            builder.append("\"name\"");
-            builder.append(" : ");
-            builder.append("\"Anderson\"");
-            
-            builder.append(",");
-            
-            builder.append("\"nickname\"");
-            builder.append(" : ");
-            builder.append("\"anderltda\"");
-            
-            builder.append(",");
-            
-            builder.append("\"lastname\"");
-            builder.append(" : ");
-            builder.append("\"Nascimento\"");
-            
-            builder.append(",");
-            
-            builder.append("\"age\"");
-            builder.append(" : ");
-            builder.append("\"35\"");
-            
-            builder.append(",");
-            
-            builder.append("\"city\"");
-            builder.append(" : ");
-            builder.append("\"SP\"");
-            
-            builder.append(",");
-            
-            builder.append("\"working\"");
-            builder.append(" : ");
-            builder.append("\"VELOE\"");
-            
-            builder.append(",");
-            
-            builder.append("\"location\"");
-            builder.append(" : ");
-            builder.append("\"" + pageContents + "\"");
-            
-            builder.append(" }");
-            
-            return new GatewayResponse(builder.toString(), headers, 200);
+            return new GatewayResponse(getJson(), headers, 200);
                         
         } catch (Exception e) {
             subsegment.addException(e);
@@ -93,6 +45,72 @@ public class AppHandler implements RequestHandler<Object, Object> {
         try(BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
             return br.lines().collect(Collectors.joining(System.lineSeparator()));
         }
+    }
+    
+    
+    private String getJson() throws Exception {
+    	
+    	final String pageContents = this.getPageContents("https://checkip.amazonaws.com");
+
+        StringBuilder builder = new StringBuilder();
+        
+        builder.append("{ ");
+        
+        builder.append("\"name\"");
+        builder.append(" : ");
+        builder.append("\"Anderson\"");
+        
+        builder.append(",");
+        
+        builder.append("\"nickname\"");
+        builder.append(" : ");
+        builder.append("\"anderltda\"");
+        
+        builder.append(",");
+        
+        builder.append("\"lastname\"");
+        builder.append(" : ");
+        builder.append("\"Nascimento\"");
+        
+        builder.append(",");
+        
+        builder.append("\"age\"");
+        builder.append(" : ");
+        builder.append("\"35\"");
+        
+        builder.append(",");
+        
+        builder.append("\"city\"");
+        builder.append(" : ");
+        builder.append("\"SP\"");
+        
+        builder.append(",");
+        
+        builder.append("\"working\"");
+        builder.append(" : ");
+        builder.append("\"VELOE\"");
+        
+        builder.append(",");
+        
+        builder.append("\"time\"");
+        builder.append(" : ");
+        builder.append("\"Barcelona\"");
+        
+        builder.append(",");
+        
+        builder.append("\"favorite food\"");
+        builder.append(" : ");
+        builder.append("\"japonese foods\"");
+        
+        builder.append(",");
+        
+        builder.append("\"location\"");
+        builder.append(" : ");
+        builder.append("\"" + pageContents + "\"");
+        
+        builder.append(" }");
+        
+        return builder.toString();
     }
 
 }
