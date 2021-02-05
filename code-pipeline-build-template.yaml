@@ -15,7 +15,7 @@ Resources:
     Properties:
       AuthType: PERSONAL_ACCESS_TOKEN
       ServerType: GITHUB
-      Token: '3bcebf9387fbeb086bb61aa121aa43a8d4bf8680'   
+      Token: '6a9d6d2c2fbf6c3b7763e41b7bd6e0dc6a3858a1'   
 
 # Criando o recurso CodeBuild
   CodeBuildApiAWSLambda:
@@ -80,7 +80,7 @@ Resources:
             Repo: api-aws-lambda
             Branch: master
             PollForSourceChanges: true
-            OAuthToken: '3bcebf9387fbeb086bb61aa121aa43a8d4bf8680'
+            OAuthToken: '6a9d6d2c2fbf6c3b7763e41b7bd6e0dc6a3858a1'
           RunOrder: 1
       - Name: Build
         Actions:
