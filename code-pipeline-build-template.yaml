@@ -2,21 +2,20 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: Criando CI/CD da api-aws-lambda
 Resources:
 
-Resources:
-  # This resource allows to connect CodeBuild with Github using Personal Access Token.
-  CodeBuildSourceCredential:
-    Type: AWS::CodeBuild::SourceCredential
-    Properties:
-      AuthType: PERSONAL_ACCESS_TOKEN
-      ServerType: GITHUB
-      Token: "b359269bb2191f76d1d581282f80c845482ca518"
-      
 # Criando o recurso S3 bucket para CodeBuild
   BuildArtifactsBucket:
     Type: AWS::S3::Bucket
     Properties:
       VersioningConfiguration:
-        Status: Enabled       
+        Status: Enabled  
+        
+# This resource allows to connect CodeBuild with Github using Personal Access Token.
+  CodeBuildSourceCredential:
+    Type: AWS::CodeBuild::SourceCredential
+    Properties:
+      AuthType: PERSONAL_ACCESS_TOKEN
+      ServerType: GITHUB
+      Token: '3bcebf9387fbeb086bb61aa121aa43a8d4bf8680'   
 
 # Criando o recurso CodeBuild
   CodeBuildApiAWSLambda:
@@ -43,6 +42,7 @@ Resources:
         - Arn    
       Source:
         Auth:
+          Resource: !Ref CodeBuildSourceCredential
           Type: OAUTH
         GitCloneDepth: 1
         GitSubmodulesConfig:
@@ -80,7 +80,7 @@ Resources:
             Repo: api-aws-lambda
             Branch: master
             PollForSourceChanges: true
-            OAuthToken: !Ref CodeBuildSourceCredential
+            OAuthToken: '3bcebf9387fbeb086bb61aa121aa43a8d4bf8680'
           RunOrder: 1
       - Name: Build
         Actions:
