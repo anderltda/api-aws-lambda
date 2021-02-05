@@ -88,7 +88,7 @@ public class AppHandler implements RequestHandler<Object, Object> {
         
         builder.append("\"working\"");
         builder.append(" : ");
-        builder.append("\"Itau\"");
+        builder.append("\"Itau-Unibanco\"");
         
         builder.append(",");
         
