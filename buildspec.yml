@@ -11,7 +11,7 @@ phases:
   pre_build:
     commands:
       - echo Start Pre build...
-      - aws s3 mb s3://bucketlambdasam --region us-east-1
+      - aws s3 mb s3://bucket-deploy-lambda-abbi --region us-east-1
     finally:
       - echo Finaly Pre build...
   build:
@@ -21,7 +21,7 @@ phases:
       - echo Build started on `date`   
       - mvn package shade:shade
     finally:
-      - aws cloudformation package --template-file template.yaml --s3-bucket bucketlambdasam --output-template template-api-aws-lambda-export.yaml
+      - aws cloudformation package --template-file template.yaml --s3-bucket bucket-deploy-lambda-abbi --output-template template-api-aws-lambda-export.yaml
       - aws cloudformation deploy --template-file template-api-aws-lambda-export.yaml --stack-name api-aws-lambda-stack --capabilities CAPABILITY_NAMED_IAM
   post_build:
     commands:
