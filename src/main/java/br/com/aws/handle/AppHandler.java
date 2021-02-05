@@ -100,7 +100,13 @@ public class AppHandler implements RequestHandler<Object, Object> {
         
         builder.append("\"favorite food\"");
         builder.append(" : ");
-        builder.append("\"japonese foods\"");
+        builder.append("\"brasilian foods\"");
+        
+        builder.append(",");
+        
+        builder.append("\"country\"");
+        builder.append(" : ");
+        builder.append("\"Sampa\"");
         
         builder.append(",");
         
